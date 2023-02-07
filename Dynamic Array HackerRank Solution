@@ -1,0 +1,17 @@
+vector<int> dynamicArray(int n, vector<vector<int>> queries) {
+    vector<int> ans;
+    vector<int> arr[n];    
+    int lastAnswer=0;
+    for(int i=0; i<queries.size(); i++){
+        if(queries[i][0]==1){
+            int m = ((queries[i][1]^lastAnswer)%n);
+            arr[m].push_back(queries[i][2]);
+        }
+        else{
+            int m = ((queries[i][1]^lastAnswer)%n);
+            lastAnswer = arr[m][queries[i][2]%size(arr[m])];
+            ans.push_back(lastAnswer);
+        }
+    }
+    return ans;
+}
